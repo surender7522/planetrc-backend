@@ -138,10 +138,10 @@ class Room:
         """
         self._user_meta[user_id].message_count += 1
         for websocket in self._users.values():
-            await websocket.send_text(msg)
-            # await websocket.send_json(
-            #     {"type": "MESSAGE", "data": {"user_id": user_id, "msg": msg}}
-            # )
+            #await websocket.send_text(msg)
+            await websocket.send_json(
+                {"type": "MESSAGE", "data": {"user_id": user_id, "msg": msg}}
+            )
 
     async def broadcast_user_joined(self, user_id: str):
         """Broadcast message to all connected users.
